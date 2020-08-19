@@ -1,0 +1,33 @@
+{
+  "impact_crime": {
+    "general": 1.15,
+    "excessive_force": 1.7, 
+    "violent_crime_adjuster": 1000, 
+    "property_crime_adjuster": 1000, 
+    "time": 0.995
+  },
+  "topology": {
+    "x_bounds": [
+      0,
+      65
+    ],
+    "y_bounds": [
+      0,
+      65
+    ],
+    "wrapping_preset": "torus",
+    "search_radius": 0
+  },
+  "pd": {
+    "pd_agent_density": 0.25, 
+    "pd_bias_white": 0.5, 
+    "pd_bias_black": 0.9, 
+    "pd_bias_amerindian": 0.8, 
+    "pd_bias_asian": 0.4, 
+    "pd_bias_hawaiian": 0.7, 
+    "pd_bias_other_race": 0.75
+  },
+  "community": {
+    "community_tries": 100
+  }
+}

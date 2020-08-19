@@ -1,0 +1,209 @@
+{
+  "outputs": {
+    "num_white": [
+      {
+        "op": "filter",
+        "field": "type",
+        "comparison": "eq",
+        "value": "civilian_agent"
+      },
+      {
+        "op": "filter",
+        "field": "race",
+        "comparison": "eq",
+        "value": "white"
+      },
+      { 
+        "op": "count"
+      }
+    ],
+    "num_black": [
+      {
+        "op": "filter",
+        "field": "type",
+        "comparison": "eq",
+        "value": "civilian_agent"
+      },
+      {
+        "op": "filter",
+        "field": "race",
+        "comparison": "eq",
+        "value": "black"
+      },
+      { 
+        "op": "count"
+      }
+    ],
+    "avg_police_impression_white": [
+      {
+        "op": "filter",
+        "field": "type",
+        "comparison": "eq",
+        "value": "civilian_agent"
+      },
+      {
+        "op": "filter",
+        "field": "race",
+        "comparison": "eq",
+        "value": "white"
+      },
+      {
+        "op": "get",
+        "field": "police_impression"
+      },
+      {
+        "op": "mean"
+      }
+    ],
+    "avg_police_impression_black": [
+      {
+        "op": "filter",
+        "field": "type",
+        "comparison": "eq",
+        "value": "civilian_agent"
+      },
+      {
+        "op": "filter",
+        "field": "race",
+        "comparison": "eq",
+        "value": "black"
+      },
+      {
+        "op": "get",
+        "field": "police_impression"
+      },
+      {
+        "op": "mean"
+      }
+    ], 
+    "avg_crime_score_white": [
+      {
+        "op": "filter",
+        "field": "type",
+        "comparison": "eq",
+        "value": "civilian_agent"
+      },
+      {
+        "op": "filter",
+        "field": "race",
+        "comparison": "eq",
+        "value": "white"
+      },
+      {
+        "op": "get",
+        "field": "crime_score"
+      },
+      {
+        "op": "mean"
+      }
+    ]
+  },
+  "avg_crime_score_black": [
+      {
+        "op": "filter",
+        "field": "type",
+        "comparison": "eq",
+        "value": "civilian_agent"
+      },
+      {
+        "op": "filter",
+        "field": "race",
+        "comparison": "eq",
+        "value": "black"
+      },
+      {
+        "op": "get",
+        "field": "crime_score"
+      },
+      {
+        "op": "mean"
+      }
+    ]
+  },
+  "plots": [
+    {
+      "title": "Number of White Civilians",
+      "timeseries": [
+        "num_white"
+      ],
+      "layout": {
+        "width": "50%",
+        "height": "33%"
+      },
+      "position": {
+        "x": "0%",
+        "y": "0%"
+      }
+    },
+    {
+      "title": "Number of Black Civilians",
+      "timeseries": [
+        "num_black"
+      ],
+      "layout": {
+        "width": "50%",
+        "height": "33%"
+      },
+      "position": {
+        "x": "50%",
+        "y": "0%"
+      }
+    },
+    {
+      "title": "Average Police Impression (White)",
+      "timeseries": [
+        "avg_police_impression_white"
+      ],
+      "layout": {
+        "width": "50%",
+        "height": "33%"
+      },
+      "position": {
+        "x": "0%",
+        "y": "40%"
+      }
+    },
+    {
+      "title": "Average Police Impression (Black)",
+      "timeseries": [
+        "avg_police_impression_black"
+      ],
+      "layout": {
+        "width": "50%",
+        "height": "33%"
+      },
+      "position": {
+        "x": "50%",
+        "y": "40%"
+      }
+    },
+    {
+      "title": "Average Criminality (White)",
+      "timeseries": [
+        "avg_crime_score_white"
+      ],
+      "layout": {
+        "width": "50%",
+        "height": "33%"
+      },
+      "position": {
+        "x": "0%",
+        "y": "75%"
+      }
+    },
+    {
+      "title": "Average Criminality (Black)",
+      "timeseries": [
+        "avg_criminality_black"
+      ],
+      "layout": {
+        "width": "50%",
+        "height": "33%"
+      },
+      "position": {
+        "x": "50%",
+        "y": "75%"
+      }
+    }
+  ]
+}

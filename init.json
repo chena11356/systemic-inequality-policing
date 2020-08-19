@@ -1,0 +1,6 @@
+[
+  {
+    "agent_id": "police_and_communities_creator",
+    "behaviors": ["create_police_and_communities.js", "@hash/remove_self.js"]
+  }
+]

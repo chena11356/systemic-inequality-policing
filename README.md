@@ -1,4 +1,4 @@
-# MODELING SYSTEMIC INEQUALITY IN LAW ENFORCEMENT
+# Modeling Systemic Inequality in Law Enforcement
 
 [Run the model here!](https://hash.ai/index/5f397938ceaba295d1929d87/police-brutality-and-inequality)
 

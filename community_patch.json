@@ -1,0 +1,44 @@
+function calculateColor(violent, property) {
+  // Return a color, redder meaning more crime, green meaning less crime
+  var r = Math.round(255 * ((violent + property) / 2)); 
+  var g = 255 - r;
+  return [r, g, 0];
+}
+
+function behavior(state, context) {
+  const { impact_crime } = context.globals();
+  const HIGH_VIOLENT_CRIME_ADJ = 996 / impact_crime.violent_crime_adjuster; // In 2018, D.C. was the state with the highest violent crime rate (https://www.statista.com/statistics/200445/reported-violent-crime-rate-in-the-us-states/)
+  const LOW_VIOLENT_CRIME_ADJ = 112 / impact_crime.violent_crime_adjuster; // In 2018, Maine was the state with the lowest violent crime rate (https://www.statista.com/statistics/200445/reported-violent-crime-rate-in-the-us-states/)
+  const HIGH_PROPERTY_CRIME_ADJ = 4374 / impact_crime.property_crime_adjuster; // In 2018, D.C. was the state with the highest property crime rate (https://www.statista.com/statistics/232575/property-crime-rate-in-the-us-by-state/)
+  const LOW_PROPERTY_CRIME_ADJ = 1249 / impact_crime.property_crime_adjuster; // In 2018, New Hampshire was the state with the lowest property crime rate (https://www.statista.com/statistics/232575/property-crime-rate-in-the-us-by-state/)
+  let rgb = state.get("rgb");
+  let violent_crime_adj = state.get("violent_crime_adj");
+  let property_crime_adj = state.get("property_crime_adj");
+  let name = state.get("name");
+  // Adjust the crime rate if need be
+  const adj_crime_rate_events = context.messages().filter(msg => msg.type === "adjust_crime_rate");
+  adj_crime_rate_events.forEach(m => {
+    if (m.data.excessive_force) {
+      violent_crime_adj = violent_crime_adj * impact_crime.excessive_force;
+      property_crime_adj = property_crime_adj * impact_crime.excessive_force;
+    } else {
+      violent_crime_adj = violent_crime_adj * impact_crime.general;
+      property_crime_adj = property_crime_adj * impact_crime.general;
+    }
+  });
+  // Adjust crime rates passively (time)
+  violent_crime_adj = violent_crime_adj * impact_crime.time;
+  property_crime_adj = property_crime_adj * impact_crime.time;
+  // Make sure crime rates do not extreme
+  if (violent_crime_adj > 1) {
+    violent_crime_adj = 1;
+  }
+  if (property_crime_adj > 1) {
+    property_crime_adj = 1;
+  }
+  rgb = calculateColor(violent_crime_adj * impact_crime.violent_crime_adjuster, property_crime_adj * impact_crime.property_crime_adjuster);
+  state.set("rgb", rgb);
+  state.set("violent_crime_adj", violent_crime_adj);
+  state.set("property_crime_adj", property_crime_adj);
+  return state;
+}
